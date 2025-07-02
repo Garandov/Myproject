@@ -7,8 +7,8 @@ import { validationResult } from 'express-validator';
 import { registerValidation, loginValidation,postCreateValidation } from './validations.js';
 import UserModel from './models/User.js';
 import checkAuth from './utilis/checkAuth.js';
-import * as userControler from './nontrolers/userControler.js'
-import * as PostControler from './nontrolers/PostControlers.js'
+import * as userControler from './controlers/userControler.js'
+import * as PostControler from './controlers/PostControlers.js'
 import handleerrors from './utilis/handleerrors.js';
 
 mongoose.connect('mongodb+srv://Volkazavr:0987@garandov.n0uirze.mongodb.net/')

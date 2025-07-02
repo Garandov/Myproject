@@ -38,7 +38,7 @@ export const getOne = async (req, res) => {
     const doc = await PostModel.findOneAndUpdate(
       { _id: postId },
       { $inc: { viewsCount: 1 } },
-      { returnDocument: "after" } // можно заменить на { new: true } — более привычный вариант
+      { returnDocument: "after" } 
     );
 
     if (!doc) {
