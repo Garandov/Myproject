@@ -9,7 +9,7 @@ export const loginValidation = [
 export const registerValidation = [
     body('email', "Неверные данные входа").isEmail(),
     body('password',"Неверные данные входа").isLength({min: 3}),
-    body('fullname',"Неверные данные входа").isLength({min: 3}),
+    body('username',"Неверные данные входа").isLength({min: 3}),
     body('avatarUrl',"Неверные данные входа").optional().isURL(),
 
 ];

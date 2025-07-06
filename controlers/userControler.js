@@ -1,18 +1,19 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import UserModel from '../models/User.js';
-
+import PostModel from '../models/Post.js';
 export const register = async (req,res) => {
 
     
       try {
+
         const password = req.body.password;
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
     
         const doc = new UserModel({
           email: req.body.email,
-          fullname: req.body.fullname,
+          username: req.body.username,
           avatarUrl: req.body.avatarUrl,
           passwordHash: hash,
         });
@@ -68,17 +69,17 @@ export const login = async (req,res) => {
 export const getMe = async (req,res) => {
   try {
     const user = await UserModel.findById(req.userId);
-
     if (!user) {
       return res.status(404).json({
         message: 'Пользователь не найден',
       });
     }
-
+    const posts = await PostModel.find({ user: req.userId });
     const { passwordHash, ...userData } = user._doc;
 
     res.json({
-      ...userData
+      ...userData,
+      posts,
     });
   } catch (err) {
     console.log(err);

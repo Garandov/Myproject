@@ -11,7 +11,7 @@ import * as userControler from './controlers/userControler.js'
 import * as PostControler from './controlers/PostControlers.js'
 import handleerrors from './utilis/handleerrors.js';
 
-mongoose.connect('mongodb+srv://Volkazavr:0987@garandov.n0uirze.mongodb.net/')
+mongoose.connect('mongodb+srv://Garandov:12332111@cluster0.o9c10fo.mongodb.net/')
   .then(() => {
     console.log('MongoDB connected');
   })
@@ -25,17 +25,17 @@ app.use(express.json());
 app.post('/auth/register',registerValidation,handleerrors, userControler.register);
 
 app.post('/auth/login',loginValidation,handleerrors, userControler.login);
-app.get('/auth/getMe',  checkAuth,userControler.getMe );
+app.get('/getMe',  checkAuth,userControler.getMe );
 
 
 app.get('/post',PostControler.getAll)
 
 app.get('/post/:id',PostControler.getOne)
-app.post('/post', checkAuth,postCreateValidation,handleerrors,PostControler.create)
+app.post('/create-post', checkAuth,postCreateValidation,handleerrors,PostControler.create)
 app.delete('/post/:id', checkAuth,PostControler.remove)
 app.patch('/post/:id', checkAuth,postCreateValidation,handleerrors,PostControler.update)
 
-app.listen(5000,() => {
+app.listen(1488,() => {
   try {
   console.log('Server started');
 
