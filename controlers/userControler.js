@@ -2,6 +2,9 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import UserModel from '../models/User.js';
 import PostModel from '../models/Post.js';
+import dotenv from "dotenv";
+dotenv.config();
+const SECRET = process.env.SECRET;;
 
 export const register = async (req, res) => {
   try {
@@ -15,9 +18,12 @@ export const register = async (req, res) => {
       passwordHash: hash,
     });
 
-    const user = await doc.save();
-
-    const token = jwt.sign({ _id: user._id }, 'secret123', { expiresIn: '30d' });
+    const user = await doc.save(); 
+    const token = jwt.sign(
+      { _id: user._id },
+      process.env.SECRET,
+      { expiresIn: '30d' }
+    );
 
     const { passwordHash, ...userData } = user._doc;
 
@@ -26,12 +32,13 @@ export const register = async (req, res) => {
       token,
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json({
       message: 'Не удалось зарегистрироваться',
     });
   }
 };
+
 
 export const login = async (req, res) => {
   try {
@@ -45,7 +52,7 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: 'Неверный логин или пароль' });
     }
 
-    const token = jwt.sign({ _id: user._id }, 'secret123', { expiresIn: '30d' });
+    const token = jwt.sign({ _id: user._id }, `${SECRET}`, { expiresIn: '30d' });
     const { passwordHash, ...userData } = user._doc;
 
     res.json({
