@@ -23,7 +23,7 @@ function CreatePostPage() {
       toast.success('Задача успешно создана!', {
         position: 'top-right',
         autoClose: 2000,
-        onClose: () => navigate('/'), // ✅ переход после уведомления
+        onClose: () => navigate('/'),
       });
     } catch (err) {
       const errors = err.response?.data?.errors;
@@ -49,6 +49,7 @@ function CreatePostPage() {
   return (
     <div className="form-container">
       <h2>Создание задачи</h2>
+
       <input
         type="text"
         placeholder="Заголовок"
@@ -56,6 +57,7 @@ function CreatePostPage() {
         onChange={(e) => setTitle(e.target.value)}
         className="form-input"
       />
+
       <textarea
         placeholder="Описание"
         value={text}
@@ -63,9 +65,17 @@ function CreatePostPage() {
         className="form-input"
         rows={4}
       />
-      <button onClick={handleSubmit} className="form-button">
-        Создать
-      </button>
+
+      <div className="form-buttons">
+        <button onClick={handleSubmit} className="form-button">
+          Создать
+        </button>
+
+        {/* 👇 Новая кнопка "Назад" */}
+        <button onClick={() => navigate('/')} className="form-button back-button">
+          Назад
+        </button>
+      </div>
     </div>
   );
 }
