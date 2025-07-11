@@ -33,7 +33,13 @@ function HomePage() {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTasks((prev) => prev.filter((task) => task._id !== id));
-      toast.success('Задача удалена!');
+  toast('Задача удалена!', {
+  icon: () => <span style={{ fontSize: '20px', color: 'red' }}>❌</span>,
+  className: 'toast-delete',
+  autoClose: 2000
+});
+
+
     } catch (err) {
       toast.error('Ошибка при удалении');
     }

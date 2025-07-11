@@ -33,7 +33,11 @@ function EditPostPage() {
         { title, text },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      toast.success('Задача обновлена!');
+      toast('Задача обновлена!', {
+        icon: () => <span style={{ fontSize: '20px', color: 'yellow' }}>✏️</span>,
+        className: 'toast-delete',
+        autoClose: 2000
+      });
       navigate('/');
     } catch (err) {
       toast.error('Ошибка при обновлении задачи');
