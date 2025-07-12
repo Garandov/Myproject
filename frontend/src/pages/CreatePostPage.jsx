@@ -71,7 +71,7 @@ function CreatePostPage() {
           Создать
         </button>
 
-        {/* 👇 Новая кнопка "Назад" */}
+        {}
         <button onClick={() => navigate('/')} className="form-button back-button">
           Назад
         </button>
