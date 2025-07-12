@@ -4,6 +4,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+   
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject",
     "start:backend": "nodemon index.js",
     "start:frontend": "cd frontend && npm start",
     "start:all": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
