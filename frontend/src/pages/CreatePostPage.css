@@ -2,7 +2,7 @@
   max-width: 500px;
   margin: 80px auto;
   padding: 30px;
-  background: #fff;
+  background: #ffffffc0;
   box-shadow: 0 0 10px #ccc;
   border-radius: 12px;
   text-align: center;
@@ -40,6 +40,6 @@
 }
 
 .back-button {
-  background-color: #ccc;
-  color: black;
+  background-color: #525252;
+  color: #fff;
 }
