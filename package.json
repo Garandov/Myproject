@@ -4,11 +4,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-   
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject",
+    "start": "react-scripts start",
+    "build": "cd frontend && npm install && npm run build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
     "start:backend": "nodemon index.js",
     "start:frontend": "cd frontend && npm start",
     "start:all": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
@@ -26,6 +25,7 @@
     "mongoose": "^8.14.2",
     "multer": "^1.4.5-lts.2",
     "nodemon": "^3.1.10",
+    "path": "^0.12.7",
     "react-icons": "^5.5.0",
     "react-scripts": "^5.0.1"
   },
