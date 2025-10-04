@@ -47,7 +47,6 @@ app.delete('/post/:id', checkAuth,PostControler.remove)
 app.patch('/post/:id', checkAuth,postCreateValidation,handleerrors,PostControler.update)
 
 app.use(express.static(path.join(__dirname, 'frontend', 'build')));
-
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
 });

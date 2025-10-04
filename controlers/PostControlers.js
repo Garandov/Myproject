@@ -75,6 +75,7 @@ export const remove = async (req, res) => {
     res.status(500).json({
       message: 'Не удалось удалить статью',
     });
+    
   }
 };
 export const update  = async (req,res) => {
