@@ -1,11 +1,7 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
 import multer from 'multer';
-import { validationResult } from 'express-validator';
 import { registerValidation, loginValidation,postCreateValidation } from './validations.js';
-import UserModel from './models/User.js';
 import checkAuth from './utilis/checkAuth.js';
 import * as userControler from './controlers/userControler.js'
 import * as PostControler from './controlers/PostControlers.js'
@@ -33,9 +29,11 @@ mongoose.connect(`${DB}`)
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.post('/auth/register',registerValidation,handleerrors, userControler.register);
+app.post('/register',registerValidation,handleerrors, userControler.register);
+app.post('/post/:id/comment', checkAuth, PostControler.addComment);
+app.post('/post/:id/like', checkAuth, PostControler.toggleLike);
 
-app.post('/auth/login',loginValidation,handleerrors, userControler.login);
+app.post('/login',loginValidation,handleerrors, userControler.login);
 app.get('/getMe',  checkAuth,userControler.getMe );
 
 
