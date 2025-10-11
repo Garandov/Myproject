@@ -37,7 +37,7 @@ app.post('/login',loginValidation,handleerrors, userControler.login);
 app.get('/getMe',  checkAuth,userControler.getMe );
 
 
-app.get('/post',PostControler.getAll)
+app.get('/posts',PostControler.getAll)
 
 app.get('/post/:id',PostControler.getOne)
 app.post('/create-post', checkAuth,postCreateValidation,handleerrors,PostControler.create)
