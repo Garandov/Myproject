@@ -15,6 +15,17 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const storage = multer.diskStorage({
+  destination: (_, __, cb) => {
+    cb(null, 'uploads');
+  },
+  filename: (_, file, cb) => {
+    cb(null, file.originalname);
+  },
+})
+
+const upload = multer({storage});
+
 const PORT = process.env.PORT;
 const DB = process.env.DB;
 
@@ -36,7 +47,12 @@ app.post('/post/:id/like', checkAuth, PostControler.toggleLike);
 app.post('/login',loginValidation,handleerrors, userControler.login);
 app.get('/getMe',  checkAuth,userControler.getMe );
 
-
+app.post('/upload',checkAuth, upload.single('image'), (req,res)=> {
+  res.json({
+    url: `/uploads/${req.file.originalname}`
+  })
+})
+app.use ("/uploads", express.static('uploads'))
 app.get('/posts',PostControler.getAll)
 
 app.get('/post/:id',PostControler.getOne)
