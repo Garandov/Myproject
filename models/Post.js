@@ -22,6 +22,10 @@ const PostSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
+    imageUrl: {
+      type: String, 
+      default: '',
+    },
     likes: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -31,8 +35,7 @@ const PostSchema = new mongoose.Schema(
     comments: [CommentSchema],
   },
   {
-    timestamps: true, 
-    
+    timestamps: true,
   }
 );
 

@@ -4,8 +4,8 @@ export const create = async (req, res) => {
     const doc = new PostModel({
       title: req.body.title,
       text: req.body.text,
+      imageUrl: req.body.imageUrl ? req.body.imageUrl : '',
       tags: req.body.tags,
-      imageUrl: req.body.imageUrl,
       user: req.userId,
     });
 
@@ -13,11 +13,10 @@ export const create = async (req, res) => {
     res.json(post);
   } catch (err) {
     console.error(err);
-    res.status(500).json({
-      message: 'Не удалось создать пост',
-    });
+    res.status(500).json({ message: 'Не удалось создать пост' });
   }
 };
+
 
 
 export const getAll = async (req, res) => {
