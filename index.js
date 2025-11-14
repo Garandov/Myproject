@@ -10,19 +10,25 @@ import { fileURLToPath } from 'url';
 import handleerrors from './utilis/handleerrors.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import crypto from 'crypto';
+
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 
 const storage = multer.diskStorage({
   destination: (_, __, cb) => {
     cb(null, 'uploads');
   },
   filename: (_, file, cb) => {
-    cb(null, file.originalname);
+    const ext = path.extname(file.originalname); 
+    const newName = crypto.randomUUID() + ext;  
+    cb(null, newName);
   },
 });
+
 
 const upload = multer({ storage });
 
@@ -30,7 +36,7 @@ const PORT = process.env.PORT;
 const DB = process.env.DB;
 
 mongoose
-  .connect(`${DB}`)
+  .connect(DB)
   .then(() => {
     console.log('MongoDB connected');
   })
@@ -49,10 +55,13 @@ app.post('/post/:id/comment', checkAuth, PostControler.addComment);
 app.post('/post/:id/like', checkAuth, PostControler.toggleLike);
 app.post('/login', loginValidation, handleerrors, userControler.login);
 app.get('/getMe', checkAuth, userControler.getMe);
-
 app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: 'Файл не загружен' });
+  }
+
   res.json({
-    url: `/uploads/${req.file.originalname}`,
+    url: `${process.env.SERVER_URL}/uploads/${req.file.filename}`,
   });
 });
 

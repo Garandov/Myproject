@@ -11,7 +11,7 @@ export default function Navbar() {
 
   return (
     <div className="navbar">
-      <Link to="/" className="brand">MySocial</Link>
+      <Link to="/" className="brand">Garandov</Link>
       <div className="nav-right">
         {isAuth ? (
           <>

@@ -16,6 +16,12 @@ export default function PostCard({ post }) {
       console.error(err);
     }
   };
+{post.user === localStorage.getItem("userId") && (
+  <div className="post-actions">
+    <button className="btn" onClick={handleEdit}>✏ Редактировать</button>
+    <button className="btn" style={{background:"red"}} onClick={handleDelete}>🗑 Удалить</button>
+  </div>
+)}
 
   const addComment = async (e) => {
     e.preventDefault();
