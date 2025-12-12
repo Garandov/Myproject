@@ -1,6 +1,6 @@
 
 Garandov Social Network 
-Этот проект — **веб-соц. Построенная на стеке MERN (MongoDB, Express, React, Node.js).  
+Этот проект — веб-соц. сеть. Построенная на стеке MERN (MongoDB, Express, React, Node.js).  
 
 ---
 
